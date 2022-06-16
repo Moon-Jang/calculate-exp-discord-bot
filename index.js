@@ -25,7 +25,7 @@ client.on('messageCreate', async (msg) => {
 
     try {
         if (currentMessage === WORKING_BOT_START_WORD) {
-            msg.reply(MessageScript.workingBot.start);
+            msg.reply(MessageScript.workingBot.welcome);
             return;
         }
 
@@ -36,15 +36,24 @@ client.on('messageCreate', async (msg) => {
         }
 
         if (history[0] === WORKING_BOT_START_WORD) {
-            const [level, startExp] = currentMessage.split('/');
-            firstStepRequestValidate(+level, +startExp)
-            msg.reply(MessageScript.workingBot.end)
+            const level = +currentMessage.trim();
+            zeroStepRequestValidate(level)
+            msg.reply(MessageScript.workingBot.startExp)
             return
         }
 
         if (history[1] === WORKING_BOT_START_WORD) {
+            const startExp = +currentMessage.trim();
+            firstStepRequestValidate(startExp)
+            msg.reply(MessageScript.workingBot.endExp)
+            return
+        }
+
+        if (history[2] === WORKING_BOT_START_WORD) {
+            const level = +history[1];
+            const startExp = +history[0];
             const endExp = +currentMessage.trim();
-            const [level, startExp] = history[0].split('/');
+            
             secondStepRequestValidate(+endExp)
 
             const totalExp =  Math.round((endExp - startExp) * 10000) / 10000;
@@ -78,17 +87,18 @@ async function fetchHistory(client, channelId) {
 }
 
 
-function firstStepRequestValidate(level, startExp) {
+function zeroStepRequestValidate(level) {
     if (isNaN(level)) {
         throw Error("레벨은 숫자로 입력해주세요." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
-
-    if (isNaN(startExp)) {
-        throw Error("경험치는 숫자로 입력해주세요." + FAIL_MESSAGE + RESTART_MESSAGE)
-    }
-
     if (level < 258 && level > 275) {
         throw Error("레벨 입력 범위는 258 ~ 275 입니다." + FAIL_MESSAGE + RESTART_MESSAGE)
+    }
+}
+
+function firstStepRequestValidate(level, startExp) {
+    if (isNaN(startExp)) {
+        throw Error("경험치는 숫자로 입력해주세요." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
 
     if (startExp < 0 && startExp > 100) {
