@@ -57,7 +57,7 @@ client.on('messageCreate', async (msg) => {
             secondStepRequestValidate(+endExp)
 
             const totalExp =  Math.round((endExp - startExp) * 10000) / 10000;
-            const workingValue = Math.round((totalExp / (WorkingValueData[level] / 2)) * 100) / 100;
+            const workingValue = Math.round(totalExp / WorkingValueData[level] * 100) / 100;
             const totalPrice = WorkingValueData.moneyPerHour * workingValue;
             const replyMessage = `총 획득 경험치: ${totalExp} \n` + `환산 비율: ${workingValue}`
             + `\n계산식: 환산 비율 * 3000원`    
@@ -77,7 +77,7 @@ client.login(AppCinfig.workingBot.token);
 
 async function fetchHistory(client, channelId) {
     const channel = client.channels.cache.get(channelId)
-    const history = (await channel.messages.fetch({ limit: 5 }))
+    const history = (await channel.messages.fetch({ limit: 7 }))
         .filter(msg => !msg.author.bot || (msg.author.bot && msg.content.startsWith("Error:")))
         .map(msg => msg.content);
 
@@ -96,7 +96,7 @@ function zeroStepRequestValidate(level) {
     }
 }
 
-function firstStepRequestValidate(level, startExp) {
+function firstStepRequestValidate(startExp) {
     if (isNaN(startExp)) {
         throw Error("경험치는 숫자로 입력해주세요." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
