@@ -1,7 +1,7 @@
 const AppCinfig = require("./AppConfig.js")
 const MessageScript = require("./MessageScript.js")
 const { Client } = require('discord.js');
-const WorkingValueData = require("./workingValueData.js");
+const WorkingValueData = require("./WorkingValueData.js");
 const client = new Client({ intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"], partials: ["CHANNEL"] })
 
 const WORKING_BOT_START_WORD = "$정산";
