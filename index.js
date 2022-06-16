@@ -98,10 +98,10 @@ function firstStepRequestValidate(level, startExp) {
 
 function secondStepRequestValidate(endExp) {
     if (isNaN(endExp)) {
-        throw Error("경험치는 숫자로 입력해주세요." + RESTART_MESSAGE)
+        throw Error("경험치는 숫자로 입력해주세요." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
 
     if (endExp < 0 && endExp > 100) {
-        throw Error("경험치 입력 범위는 0 ~ 100 입니다." + RESTART_MESSAGE)
+        throw Error("경험치 입력 범위는 0 ~ 100 입니다." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
 }
