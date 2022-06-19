@@ -14,12 +14,13 @@ client.on('ready', () => {
 
 client.on('messageCreate', async (msg) => {
     const currentMessage = msg.content;
+    const permitChannel = ['로동', '테스트']
 
     if (msg.author.bot) {
         return;
     }
 
-    if (msg.channel.name !== '로동') {
+    if (!permitChannel.includes(msg.channel.name)) {
         return;
     }
 
@@ -59,8 +60,9 @@ client.on('messageCreate', async (msg) => {
             const totalExp =  Math.round((endExp - startExp) * 10000) / 10000;
             const workingValue = Math.round(totalExp / WorkingValueData[level] * 100) / 100;
             const totalPrice = Math.round((WorkingValueData.moneyPerHour * workingValue) / 100) * 100;
+            const replyMessage = MessageScript.workingBot.result(totalExp, workingValue, totalPrice)
             
-            msg.reply(MessageScript.workingBot.result(totalExp, workingValue, totalPrice))
+            msg.reply(replyMessage)
             return
         }
 
