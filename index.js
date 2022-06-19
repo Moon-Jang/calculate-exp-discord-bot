@@ -58,11 +58,9 @@ client.on('messageCreate', async (msg) => {
 
             const totalExp =  Math.round((endExp - startExp) * 10000) / 10000;
             const workingValue = Math.round(totalExp / WorkingValueData[level] * 100) / 100;
-            const totalPrice = WorkingValueData.moneyPerHour * workingValue;
-            const replyMessage = `총 획득 경험치: ${totalExp} \n` + `환산 비율: ${workingValue}`
-            + `\n계산식: 환산 비율 * 3000원`    
-            + `\n :money_with_wings: 금액: ${Math.round((totalPrice / 100) * 100)}`
-            msg.reply(replyMessage)
+            const totalPrice = Math.round((WorkingValueData.moneyPerHour * workingValue) / 100) * 100;
+            
+            msg.reply(MessageScript.workingBot.result(totalExp, workingValue, totalPrice))
             return
         }
 

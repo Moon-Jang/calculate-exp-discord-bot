@@ -15,11 +15,21 @@ const endExpMessage =
 EX) 13.599
 `
 
+const resultMessage = (totalExp, workingValue, totalPrice) => {
+    return
+`총 획득 경험치: ${totalExp}
+환산 비율: ${workingValue}
+계산식: 환산 비율 * 3000 원    
+:money_with_wings: 금액: ${totalPrice} 원
+`
+}
+
 const MessageScript = {
     workingBot: {
         welcome: calculateStartMessage + levelMessage,
         startExp: startExpMessage,
-        endExp: endExpMessage
+        endExp: endExpMessage,
+        result: resultMessage
     }
 }
 
