@@ -101,7 +101,7 @@ function firstStepRequestValidate(startExp) {
         throw Error("경험치는 숫자로 입력해주세요." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
 
-    if (startExp < 0 && startExp > 100) {
+    if (startExp < 0 || startExp > 100) {
         throw Error("경험치 입력 범위는 0 ~ 100 입니다." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
 }
@@ -111,7 +111,7 @@ function secondStepRequestValidate(endExp) {
         throw Error("경험치는 숫자로 입력해주세요." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
 
-    if (endExp < 0 && endExp > 100) {
+    if (endExp < 0 || endExp > 100) {
         throw Error("경험치 입력 범위는 0 ~ 100 입니다." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
 }
