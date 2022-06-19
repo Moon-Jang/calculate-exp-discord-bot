@@ -56,8 +56,10 @@ client.on('messageCreate', async (msg) => {
             const endExp = +currentMessage.trim();
             
             secondStepRequestValidate(+endExp)
-
-            const totalExp =  Math.round((endExp - startExp) * 10000) / 10000;
+            
+            const t = endExp - startExp < 0 ?
+                        (100 + endExp) - startExp : endExp - startExp;
+            const totalExp =  Math.round((t) * 10000) / 10000;
             const workingValue = Math.round(totalExp / WorkingValueData[level] * 100) / 100;
             const totalPrice = Math.round((WorkingValueData.moneyPerHour * workingValue) / 100) * 100;
             const replyMessage = MessageScript.workingBot.result(totalExp, workingValue, totalPrice)
