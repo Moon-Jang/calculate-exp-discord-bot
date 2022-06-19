@@ -91,7 +91,7 @@ function zeroStepRequestValidate(level) {
     if (isNaN(level)) {
         throw Error("레벨은 숫자로 입력해주세요." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
-    if (level < 258 && level > 275) {
+    if (level < 258 || level > 275) {
         throw Error("레벨 입력 범위는 258 ~ 275 입니다." + FAIL_MESSAGE + RESTART_MESSAGE)
     }
 }
